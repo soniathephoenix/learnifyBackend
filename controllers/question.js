@@ -1,6 +1,6 @@
 const Question = require("../models/Question");
 
-// Show the question with its options
+
 async function show(req, res) {
   try {
     const id = parseInt(req.params.questionId);
