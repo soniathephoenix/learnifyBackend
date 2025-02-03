@@ -24,8 +24,8 @@ describe('User Model', () => {
             expect(response).toHaveProperty('login_id')
             expect(response.username).toBe(body.username)
             expect(response.login_id).toBe(1)
-            expect(db.query).toHaveBeenCalledWith("INSERT INTO user_login_info (username, password) VALUES ($1, $2) RETURNING login_id;", [body.username, body.password]);
-            expect(db.query).toHaveBeenCalledWith("SELECT login_id, username FROM user_login_info WHERE login_id = $1", [1]);
+            expect(db.query).toHaveBeenCalledWith("INSERT INTO login_info (username, password) VALUES ($1, $2) RETURNING login_id;", [body.username, body.password]);
+            expect(db.query).toHaveBeenCalledWith("SELECT login_id, username FROM login_info WHERE login_id = $1", [1]);
         });
         it("throws error if password or username missing", async () => {
             //Arrange
@@ -58,7 +58,7 @@ describe('User Model', () => {
             expect(response).toHaveProperty('login_id')
             expect(response.username).toBe(body.username)
             expect(response.login_id).toBe(body.login_id)
-            expect(db.query).toHaveBeenCalledWith("SELECT login_id, username FROM user_login_info WHERE login_id = $1", [body.login_id]);
+            expect(db.query).toHaveBeenCalledWith("SELECT login_id, username FROM login_info WHERE login_id = $1", [body.login_id]);
         });
         it("throws error if return from db is empty", async () => {
             //Arrange
@@ -85,7 +85,7 @@ describe('User Model', () => {
             expect(response).toHaveProperty('login_id')
             expect(response.username).toBe(body.username)
             expect(response.login_id).toBe(body.login_id)
-            expect(db.query).toHaveBeenCalledWith("SELECT login_id, username FROM user_login_info WHERE username = $1", [body.username]);
+            expect(db.query).toHaveBeenCalledWith("SELECT login_id, username, password FROM login_info WHERE username = $1", [body.username]);
         });
         it("throws error if return from db is empty", async () => {
             //Arrange
