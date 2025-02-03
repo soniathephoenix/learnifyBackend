@@ -9,7 +9,7 @@ class User {
     }
 
     static async getOneById(id) {
-        const response = await db.query("SELECT login_id, username FROM user_login_info WHERE login_id = $1", [id]);
+        const response = await db.query("SELECT login_id, username FROM login_info WHERE login_id = $1", [id]);
         if (response.rows.length != 1) {
             throw new Error("Unable to locate user.");
         }
@@ -17,7 +17,7 @@ class User {
     }
 
     static async getOneByUsername(username) {
-        const response = await db.query("SELECT login_id, username FROM user_login_info WHERE username = $1", [username]);
+        const response = await db.query("SELECT login_id, username, password FROM login_info WHERE username = $1", [username]);
         if (response.rows.length != 1) {
             throw new Error("Unable to locate user.");
         }
@@ -27,7 +27,7 @@ class User {
     static async create(data) {
         const { username, password } = data;
         if(username == undefined || password == undefined) throw Error("Ensure username and password are both provided")
-        let response = await db.query("INSERT INTO user_login_info (username, password) VALUES ($1, $2) RETURNING login_id;",
+        let response = await db.query("INSERT INTO login_info (username, password) VALUES ($1, $2) RETURNING login_id;",
             [username, password]);
         const newId = response.rows[0].login_id;
         const newUser = await User.getOneById(newId);
