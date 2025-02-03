@@ -13,7 +13,7 @@ class Question {
     this.correct_answer = correct_answer;
   }
 
-  // Get question by ID with options
+  
   static async getById(question_id) {
     const result = await db.query("SELECT question, option_a, option_b, option_c, option_d FROM questions WHERE question_id = $1",[question_id]
     );
