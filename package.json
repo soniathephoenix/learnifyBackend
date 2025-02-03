@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest --watchAll --detectOpenHandles --runInBand --verbose",
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "setup-db": "node ./database/setup.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.13.1"
   }
