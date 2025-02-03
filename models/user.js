@@ -26,6 +26,7 @@ class User {
 
     static async create(data) {
         const { username, password } = data;
+        if(username == undefined || password == undefined) throw Error("Ensure username and password are both provided")
         let response = await db.query("INSERT INTO user_login_info (username, password) VALUES ($1, $2) RETURNING login_id;",
             [username, password]);
         const newId = response.rows[0].login_id;
