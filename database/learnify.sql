@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS login_info;
 CREATE TABLE login_info (
     login_id INT GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(50) NOT NULL,
-    name VARCHAR(50) NOT NULL,
+    surname VARCHAR(50) NOT NULL,
     username VARCHAR(40) NOT NULL UNIQUE, 
     password VARCHAR(256) NOT NULL,
     PRIMARY KEY(login_id)
