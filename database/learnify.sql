@@ -4,7 +4,6 @@ DROP TABLE IF EXISTS points_info;
 DROP TABLE IF EXISTS login_info;
 
 
-
 CREATE TABLE login_info (
     login_id INT GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(50) NOT NULL,
@@ -16,13 +15,11 @@ CREATE TABLE login_info (
 );
 
 CREATE TABLE points_info (
-    user_id INT,
-    username VARCHAR(40) NOT NULL,
+    user_id INT NOT NULL,
     points INT DEFAULT 0,
     level INT DEFAULT 1,
-    PRIMARY KEY(user_id),
-    FOREIGN KEY(user_id) REFERENCES login_info(login_id)
-
+    PRIMARY KEY(user_id)
+    -- FOREIGN KEY(user_id) REFERENCES login_info(login_id) 
 );
 
 CREATE TABLE questions (
@@ -37,6 +34,7 @@ CREATE TABLE questions (
     option_d VARCHAR(200) NOT NULL,
     correct_answer VARCHAR(200) NOT NULL,
     PRIMARY KEY(question_id)
+    
 );
 
 CREATE TABLE answers (
@@ -56,10 +54,10 @@ VALUES
     ('name2', 'surname2','user2', 'email2@email', '1234567');
 
 
-INSERT INTO points_info (user_id, username, points, level)
-VALUES
-    (1, 'user1', 1, 2),
-    (2, 'user2', 2, 3);
+-- INSERT INTO points_info (user_id, points, level)
+-- VALUES
+--     (1, 1, 2),
+--     (2, 2, 3);
 
 
 
@@ -81,6 +79,21 @@ VALUES
     (2, 2, TRUE);
 
 
+
+
+CREATE OR REPLACE FUNCTION auto_insert() 
+RETURNS TRIGGER AS $$
+    BEGIN
+        INSERT INTO points_info (user_id, points, level)
+        VALUES(NEW.login_id, 0, 1);
+        RETURN NEW;
+    END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER after_insert_trigger
+AFTER INSERT ON login_info
+FOR EACH ROW 
+EXECUTE FUNCTION auto_insert();
 
 
 
