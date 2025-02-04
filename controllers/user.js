@@ -29,7 +29,7 @@ async function login(req, res) {
       const match = await bcrypt.compare(data.password, user.password);
 
       if (match) {
-        const payload = { username: user.username  }
+        const payload = { login_id: user.login_id  }
 
         jwt.sign(payload, process.env.SECRET_TOKEN, { expiresIn: 3600 }, (err, token) =>{
           if(err){ throw new Error('Error in token generation') }
@@ -48,7 +48,7 @@ async function login(req, res) {
 }
 
 async function currentQuestion(req, res) {
-  const currentUser = await User.getOneById(req.params.id)
+  const currentUser = await User.getOneById(req.body.login_id)
   const response = await currentUser.getCurrentQ()
 
   res.status(200).json(response)
