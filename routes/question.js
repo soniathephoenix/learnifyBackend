@@ -3,6 +3,7 @@ const questionsController = require("../controllers/question");
 
 const questionsRouter = express.Router();
 
+questionsRouter.get("/", questionsController.index)
 
 questionsRouter.get("/:questionId", questionsController.show);
 

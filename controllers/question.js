@@ -1,6 +1,15 @@
 const Question = require("../models/Question");
 
 
+async function index(req, res) {
+  try {
+    const question = await Question.getAll();
+    console.log("touch here")
+    res.status(200).json(question);
+  } catch (err) {
+    res.status(500).json({ error: err.message })
+  }
+}
 async function show(req, res) {
   try {
     const id = parseInt(req.params.questionId);
@@ -30,4 +39,4 @@ async function correctAnswer(req, res) {
   }
 }
 
-module.exports = { show, correctAnswer };
+module.exports = { show, correctAnswer, index };
