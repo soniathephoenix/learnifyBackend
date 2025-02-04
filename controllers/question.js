@@ -32,11 +32,4 @@ async function show(req, res) {
 async function correctAnswer(req, res) {
   try {
     const id = parseInt(req.params.questionId);
-    const correctAnswer = await Question.getCorrectAnswer(id);
-    res.status(200).json({correct_answer: correctAnswer});
-  } catch (err) {
-    res.status(404).json({ error: err.message });
-  }
-}
-
-module.exports = { show, correctAnswer, index };
+    const co
