@@ -29,8 +29,7 @@ CREATE TABLE questions (
     level INT NOT NULL,
     points_required INT NOT NULL,
     question VARCHAR(200) NOT NULL,
-    additional_data VARCHAR(200),
-    locals_interviews VARCHAR(200),
+    clue VARCHAR(200),
     option_a VARCHAR(200) NOT NULL,
     option_b VARCHAR(200) NOT NULL,
     option_c VARCHAR(200) NOT NULL,
@@ -63,27 +62,14 @@ VALUES
 
 
 
-INSERT INTO questions (level, points_required, question, option_a, option_b, option_c, option_d, correct_answer, paper_no)
+INSERT INTO questions (level, points_required, question, clue, option_a, option_b, option_c, option_d, correct_answer, paper_no)
 VALUES
-    (1, 0, 'The term CBD would be applied to which of the following?', 'A volcanic eruption', 'The infrastructure of a country', 'A city', 'Renewable energy resources', 'A city', abbreviations),
-    (1, 0, 'TNC stands for:', 'Transnational Collaboration','Tertiary Network Challenge','Trident Nuke Carrier','Transnational Corporation', 'Transnational Corporation', abbreviations),
-    (1, 0, 'Which of the following is true?', 'LIC stands for Local Index of Communication','An HIC is the opposite of an MEDC','LIC stands for Labour Intensive Community','The opposite of an MEDC is an LIC', 'The opposite of an MEDC is an LIC', abbreviations),
-    (1, 0, 'What does the M stand for in IMF?', 'Management', 'Monetary', 'Motoring', 'Madagascar', 'Monetary', abbreviations)
-    (1, 0, 'The abbreviation R&D stands for', 'Relief and Disaster', 'Research and Development', 'Rubber and Diesel', 'Response and Delay', 'Research and Development', abbreviations)
-    (1, 0, 'The GDP of a country measures what?', 'Its population increase over a ten year period','The erosion of the coastline', 'Its carbon footprint', 'Its economic performance in a given period of time', 'Its economic performance in a given period of time', abbreviations)
-    (1, 0, 'The acronym LEDC stands for:', 'Less Economically Developed Country', 'Lower Economically Developed Country', 'Lightly Environmentalised Distant Country', 'Long Evolved Distant Cousin', 'Less Economically Developed Country', abbreviations)
-    (1, 0, 'Which is the correct word to describe a person who is involved in preparing maps?', 'Mapper', 'Cartographer', 'Mapsmith', 'Mapographer', Atlases, Ordnance Survey)
-    (1, 0, 'Which of the following most accurately describes a map?', 'An accurate representation of the world', 'A representation of part or all of the surface of the Earth', 'A drawing that is used only for navigation', 'A drawing that is used only for navigation', 'A diagram that shows land use in Australia', 'A representation of part or all of the surface of the Earth', Atlases, Ordnance Survey)
-    (1, 0, 'Ordnance Survey maps cover ...', 'England', 'The USA', 'the whole world', 'Britain', 'Britain', Atlases, Ordnance Survey)
-    (1, 0, 'Which of the following statements most accurately describes an atlas?', 'A collection of maps', 'A list of data about the countries of the world', 'A navigational aid', 'A book containing maps and other geographical data', 'A book containing maps and other geographical data')
-    (1, 0, 'An avalanche is ...', 'a gradual movement of a mass of snow towards the coast', 'a slow movement of ices towards a river', 'a rapid movement of snow over flat land','a sudden fast movement of snow down a steep slope', avalanches)
-    (1, 0, 'Which of the following is least likely to cause an avalanche?', '')
-
-
-
-
-
-
+    (1, 0, 'Which one of the following is a natural factor affecting climate change?', '../images/clue1','Agriculture', 'Burning fossil fuels', 'Deforestation', 'Volcanic activity', 'Volcanic activity'),
+    (1, 1, 'Which one of the following is a process of erosion in coastal areas?', '../images/clue2', 'Hydraulic power', 'Longshore drift ', 'Rock fall', 'Slumping ', 'Hydraulic power')
+    (1, 2, 'Which word describes the process of erosion when stones collide with each other as they move downstream?', '../images/clue3', 'Abrasion', 'Attrition', 'Hydraulic action', 'Solution', 'Attrition')
+    (1, 3, 'Which statement describes the characteristics of temperate deciduous forests?', '../images/clue4', 'The vegetation is short because the growing season only lasts two months.', 'The trees drop their dead leaves because of lower temperatures in winter.', 'The vegetation is sparse because rainfall is low.', 'The vegetation is evergreen because the climate is hot all year round', 'The trees drop their dead leaves because of lower temperatures in winter.')
+    (1, 4, 'Which measure of development combines income, life expectancy and education levels?', '../images/clue5', 'Gross National Income (GNI) per head', 'Human Development Index (HDI)', 'Infant mortality rate (IMR)', 'People per doctor', 'Human Development Index (HDI)')
+    (1, 5, 'Which city is known as the City of Lions but has no native lions?', NULL, 'Hanoi', 'Bangkok', 'Kuala Lumpur', 'Singapore')
 
 
 INSERT INTO answers (user_id, question_id, correct)
