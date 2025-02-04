@@ -10,6 +10,7 @@ CREATE TABLE login_info (
     name VARCHAR(50) NOT NULL,
     surname VARCHAR(50) NOT NULL,
     username VARCHAR(40) NOT NULL UNIQUE, 
+    email VARCHAR(320) NOT NULL,
     password VARCHAR(256) NOT NULL,
     PRIMARY KEY(login_id)
 );
@@ -49,10 +50,10 @@ CREATE TABLE answers (
 );
 
 
-INSERT INTO login_info (name, surname, username, password)
+INSERT INTO login_info (name, surname, username, email, password)
 VALUES
-    ('name1', 'surname1', 'user1', '123456'),
-    ('name2', 'surname2','user2', '1234567');
+    ('name1', 'surname1', 'user1', 'email1@email','123456'),
+    ('name2', 'surname2','user2', 'email2@email', '1234567');
 
 
 INSERT INTO points_info (user_id, username, points, level)
