@@ -10,7 +10,7 @@ CREATE TABLE login_info (
     name VARCHAR(50) NOT NULL,
     surname VARCHAR(50) NOT NULL,
     username VARCHAR(40) NOT NULL UNIQUE, 
-    email VARCHAR(320) NOT NULL,
+    email VARCHAR(320) NOT NULL UNIQUE,
     password VARCHAR(256) NOT NULL,
     PRIMARY KEY(login_id)
 );
