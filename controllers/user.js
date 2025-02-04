@@ -47,7 +47,14 @@ async function login(req, res) {
     }
 }
 
+async function currentQuestion(req, res) {
+  const currentUser = await User.getOneById(req.params.id)
+  const response = await currentUser.getCurrentQ()
+
+  res.status(200).json(response)
+}
+
 
 module.exports = {
-    register, login
+    register, login, currentQuestion
 } 
