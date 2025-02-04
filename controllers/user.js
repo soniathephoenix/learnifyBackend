@@ -4,6 +4,16 @@ require("dotenv").config();
 
 const User = require('../models/User');
 
+async function updatePoints(req, res) {
+  try {
+    const userId = req.body.login_id;
+    const updatedUser = await User.incrementPoints(userId);
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+}
+
 async function register(req, res) {
     try {
       const data = req.body;
@@ -56,5 +66,5 @@ async function currentQuestion(req, res) {
 
 
 module.exports = {
-    register, login, currentQuestion
+    register, login, currentQuestion, updatePoints
 } 
