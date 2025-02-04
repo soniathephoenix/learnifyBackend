@@ -28,10 +28,10 @@ class User {
     }
 
     static async create(data) {
-        const { username, password } = data;
+        const { name, surname, username, password } = data;
         if(username == undefined || password == undefined) throw Error("Ensure username and password are both provided")
-        let response = await db.query("INSERT INTO login_info (username, password) VALUES ($1, $2) RETURNING login_id;",
-            [username, password]);
+        let response = await db.query("INSERT INTO login_info (name, surname, username, password) VALUES ($1, $2, $3, $4) RETURNING login_id;",
+            [name, surname, username, password]);
         const newId = response.rows[0].login_id;
         const newUser = await User.getOneById(newId);
         return newUser;
