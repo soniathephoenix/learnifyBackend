@@ -13,7 +13,16 @@ class Question {
     this.correct_answer = correct_answer;
   }
 
-  
+  static async getAll() {
+    console.log("hello")
+    const response = await db.query("SELECT * FROM questions ORDER BY question_id;");
+
+    if (response.rows.length === 0) {
+      throw new Error("No questions available.")
+    }
+
+    return response.rows.map(g => new Question(g));
+  }
   static async getById(question_id) {
     const result = await db.query("SELECT question, option_a, option_b, option_c, option_d FROM questions WHERE question_id = $1",[question_id]
     );
