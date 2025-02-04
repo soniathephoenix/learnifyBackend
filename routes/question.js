@@ -8,4 +8,6 @@ questionsRouter.get("/", questionsController.index)
 questionsRouter.get("/:questionId", questionsController.show);
 
 
-questionsRouter.get("/:questionId/correct", questionsControlle
+questionsRouter.get("/:questionId/correct", questionsController.correctAnswer);
+
+module.exports = questionsRouter;

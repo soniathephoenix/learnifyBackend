@@ -32,4 +32,14 @@ class Question {
     return new Question(result.rows[0]);
   }
 
-  static async getCorrectAn
+  static async getCorrectAnswer(question_id) {
+    const result = await db.query("SELECT correct_answer FROM questions WHERE question_id = $1",[question_id]
+    );
+
+    if (result.rows.length !== 1) throw new Error("Answer not found");
+
+    return result.rows[0].correct_answer;
+  }
+}
+
+module.exports = Question;
