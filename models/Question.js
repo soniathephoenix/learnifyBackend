@@ -13,6 +13,7 @@ class Question {
     this.correct_answer = correct_answer;
   }
 
+
   static async getAll() {
     console.log("hello")
     const response = await db.query("SELECT * FROM questions ORDER BY question_id;");

@@ -20,6 +20,26 @@ class User {
         return new User(response.rows[0]);
     }
 
+
+
+    static async incrementPoints(userId) {
+        const pointsQuery = 'SELECT points FROM points_info WHERE user_id = $1';
+        const pointsResult = await db.query(pointsQuery, [userId]);
+
+        if (pointsResult.rowCount === 0) {
+            throw new Error('User not found in points_info');
+        }
+
+        const currentPoints = pointsResult.rows[0].points;
+        const updateQuery = 'UPDATE points_info SET points = $1 + 1 WHERE user_id = $2 RETURNING *';
+        const updateResult = await db.query(updateQuery, [currentPoints, userId]);
+
+        const updatedUser = updateResult.rows[0];
+        return updatedUser;
+    }
+
+
+
     static async getOneByUsername(username) {
         const response = await db.query("SELECT login_id, username, password FROM login_info WHERE username = $1", [username]);
         if (response.rows.length != 1) {
