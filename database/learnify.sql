@@ -49,10 +49,10 @@ CREATE TABLE answers (
 );
 
 
-INSERT INTO login_info (username, password)
+INSERT INTO login_info (name, surname, username, password)
 VALUES
-    ('user1', '123456'),
-    ('user2', '1234567');
+    ('name1', 'surname1', 'user1', '123456'),
+    ('name2', 'surname2','user2', '1234567');
 
 
 INSERT INTO points_info (user_id, username, points, level)
@@ -62,14 +62,14 @@ VALUES
 
 
 
-INSERT INTO questions (level, points_required, question, clue, option_a, option_b, option_c, option_d, correct_answer, paper_no)
+INSERT INTO questions (level, points_required, question, clue, option_a, option_b, option_c, option_d, correct_answer)
 VALUES
     (1, 0, 'Which one of the following is a natural factor affecting climate change?', '../images/clue1','Agriculture', 'Burning fossil fuels', 'Deforestation', 'Volcanic activity', 'Volcanic activity'),
-    (1, 1, 'Which one of the following is a process of erosion in coastal areas?', '../images/clue2', 'Hydraulic power', 'Longshore drift ', 'Rock fall', 'Slumping ', 'Hydraulic power')
-    (1, 2, 'Which word describes the process of erosion when stones collide with each other as they move downstream?', '../images/clue3', 'Abrasion', 'Attrition', 'Hydraulic action', 'Solution', 'Attrition')
-    (1, 3, 'Which statement describes the characteristics of temperate deciduous forests?', '../images/clue4', 'The vegetation is short because the growing season only lasts two months.', 'The trees drop their dead leaves because of lower temperatures in winter.', 'The vegetation is sparse because rainfall is low.', 'The vegetation is evergreen because the climate is hot all year round', 'The trees drop their dead leaves because of lower temperatures in winter.')
-    (1, 4, 'Which measure of development combines income, life expectancy and education levels?', '../images/clue5', 'Gross National Income (GNI) per head', 'Human Development Index (HDI)', 'Infant mortality rate (IMR)', 'People per doctor', 'Human Development Index (HDI)')
-    (1, 5, 'Which city is known as the City of Lions but has no native lions?', NULL, 'Hanoi', 'Bangkok', 'Kuala Lumpur', 'Singapore')
+    (1, 1, 'Which one of the following is a process of erosion in coastal areas?', '../images/clue2', 'Hydraulic power', 'Longshore drift ', 'Rock fall', 'Slumping ', 'Hydraulic power'),
+    (1, 2, 'Which word describes the process of erosion when stones collide with each other as they move downstream?', '../images/clue3', 'Abrasion', 'Attrition', 'Hydraulic action', 'Solution', 'Attrition'),
+    (1, 3, 'Which statement describes the characteristics of temperate deciduous forests?', '../images/clue4', 'The vegetation is short because the growing season only lasts two months.', 'The trees drop their dead leaves because of lower temperatures in winter.', 'The vegetation is sparse because rainfall is low.', 'The vegetation is evergreen because the climate is hot all year round', 'The trees drop their dead leaves because of lower temperatures in winter.'),
+    (1, 4, 'Which measure of development combines income, life expectancy and education levels?', '../images/clue5', 'Gross National Income (GNI) per head', 'Human Development Index (HDI)', 'Infant mortality rate (IMR)', 'People per doctor', 'Human Development Index (HDI)'),
+    (1, 5, 'Which city is known as the City of Lions but has no native lions?', NULL, 'Hanoi', 'Bangkok', 'Kuala Lumpur', 'Singapore', 'Singapore');
 
 
 INSERT INTO answers (user_id, question_id, correct)
