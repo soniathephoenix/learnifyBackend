@@ -1,11 +1,14 @@
 const db = require('../database/connect');
+const Question = require('../models/Question')
 
 class User {
 
-    constructor({ login_id, username, password}) {
+    constructor({ login_id, username, password, name, surname}) {
         this.login_id = login_id;
         this.username = username;
         this.password = password;
+        this.name = name;
+        this.surname = surname;
     }
 
     static async getOneById(id) {
@@ -32,6 +35,18 @@ class User {
         const newId = response.rows[0].login_id;
         const newUser = await User.getOneById(newId);
         return newUser;
+    }
+
+    async getCurrentQ() {
+        let pointsResponse = await db.query(`
+            SELECT points
+            FROM points_info
+            WHERE user_id = $1;
+        `, [this.login_id])
+        console.log(pointsResponse);
+        const points = pointsResponse.rows[0].points
+        let questionsResponse =  await Question.getByPoints(points + 1)
+        return questionsResponse
     }
 }
 

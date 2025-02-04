@@ -20,6 +20,14 @@ class Question {
 
     return new Question(result.rows[0]);
   }
+
+  static async getByPoints(points) {
+    const result = await db.query("SELECT * FROM questions WHERE points_required = $1", [points]);
+
+    if (result.rows.length !== 1) throw new Error("Question not found");
+
+    return new Question(result.rows[0]);
+  }
   
   async getAnswers() {
     const answers = await db.query("SELECT * FROM answers WHERE question_id = $1",[this.question_id]
