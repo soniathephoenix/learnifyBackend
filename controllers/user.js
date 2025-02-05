@@ -30,6 +30,16 @@ async function register(req, res) {
     }
 }
 
+async function resetPoints(req, res) {
+  try {
+    const userId = req.body.login_id;
+    await User.resetPoints(userId);
+    res.status(200).json({ message: "Points reset successfully." });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
 async function login(req, res) {
     const data = req.body;
     try {
@@ -70,5 +80,5 @@ async function currentQuestion(req, res) {
 
 
 module.exports = {
-    register, login, currentQuestion, updatePoints
+    register, login, currentQuestion, updatePoints, resetPoints
 } 
