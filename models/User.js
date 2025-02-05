@@ -72,7 +72,7 @@ class User {
     
             if (!questionsResponse) {
                 console.log("No more questions available. User has completed all questions.");
-                return null;  // Return null to indicate no more questions
+                return null;  
             }
     
             return questionsResponse;
