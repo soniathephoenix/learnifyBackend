@@ -1,10 +1,10 @@
+--Delete all tables
 DROP TABLE IF EXISTS answers;
 DROP TABLE IF EXISTS questions;
 DROP TABLE IF EXISTS points_info;
 DROP TABLE IF EXISTS login_info;
 
-
-
+--Create table collecting data from the registration page and required for login
 CREATE TABLE login_info (
     login_id INT GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(50) NOT NULL,
@@ -15,16 +15,16 @@ CREATE TABLE login_info (
     PRIMARY KEY(login_id)
 );
 
+--Create table for the students scores
 CREATE TABLE points_info (
-    user_id INT,
-    username VARCHAR(40) NOT NULL,
+    user_id INT NOT NULL,
     points INT DEFAULT 0,
     level INT DEFAULT 1,
-    PRIMARY KEY(user_id),
-    FOREIGN KEY(user_id) REFERENCES login_info(login_id)
-
+    PRIMARY KEY(user_id)
 );
 
+
+--Create table for the grame questions
 CREATE TABLE questions (
     question_id INT GENERATED ALWAYS AS IDENTITY,
     level INT NOT NULL,
@@ -37,8 +37,10 @@ CREATE TABLE questions (
     option_d VARCHAR(200) NOT NULL,
     correct_answer VARCHAR(200) NOT NULL,
     PRIMARY KEY(question_id)
+    
 );
 
+--Create table for the student answers
 CREATE TABLE answers (
     answer_id INT GENERATED ALWAYS AS IDENTITY,
     user_id INT, 
@@ -49,20 +51,7 @@ CREATE TABLE answers (
     FOREIGN KEY(question_id) REFERENCES questions(question_id)
 );
 
-
-INSERT INTO login_info (name, surname, username, email, password)
-VALUES
-    ('name1', 'surname1', 'user1', 'email1@email','123456'),
-    ('name2', 'surname2','user2', 'email2@email', '1234567');
-
-
-INSERT INTO points_info (user_id, username, points, level)
-VALUES
-    (1, 'user1', 1, 2),
-    (2, 'user2', 2, 3);
-
-
-
+--Include game questions to questions table
 INSERT INTO questions (level, points_required, question, clue, option_a, option_b, option_c, option_d, correct_answer)
 VALUES
     (1, 0, 'Which one of the following is a natural factor affecting climate change?', '../images/clue1','Agriculture', 'Burning fossil fuels', 'Deforestation', 'Volcanic activity', 'Volcanic activity'),
@@ -73,14 +62,21 @@ VALUES
     (1, 5, 'Which city is known as the City of Lions but has no native lions?', NULL, 'Hanoi', 'Bangkok', 'Kuala Lumpur', 'Singapore', 'Singapore');
 
 
-INSERT INTO answers (user_id, question_id, correct)
-VALUES 
-    (1, 1, FALSE),
-    (1, 2, TRUE),
-    (2, 1, TRUE),
-    (2, 2, TRUE);
 
+-- Create function and trigger to auto-fill the points_info table 
+CREATE OR REPLACE FUNCTION auto_insert() 
+RETURNS TRIGGER AS $$
+    BEGIN
+        INSERT INTO points_info (user_id, points, level)
+        VALUES(NEW.login_id, 0, 1);
+        RETURN NEW;
+    END;
+$$ LANGUAGE plpgsql;
 
+CREATE TRIGGER after_insert_trigger
+AFTER INSERT ON login_info
+FOR EACH ROW 
+EXECUTE FUNCTION auto_insert();
 
 
 
