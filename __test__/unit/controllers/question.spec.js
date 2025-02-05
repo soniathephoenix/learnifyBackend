@@ -1,5 +1,5 @@
 const Question = require("../../../models/Question");
-const { index, show, correctAnswer } = require("../../../controllers/questionController");
+const { index, show, correctAnswer } = require("../../../controllers/question");
 
 const mockSend = jest.fn();
 const mockJson = jest.fn();

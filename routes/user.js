@@ -9,4 +9,7 @@ userRouter.post("/register", userController.register);
 userRouter.post("/login", userController.login);
 userRouter.get('/currentq/', authenticator, userController.currentQuestion)
 
+userRouter.post('/update-points', authenticator, userController.updatePoints)
+
+
 module.exports = userRouter;

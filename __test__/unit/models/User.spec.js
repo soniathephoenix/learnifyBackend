@@ -10,11 +10,14 @@ describe('User Model', () => {
         it("resolves correctly when username and password submitted", async () => {
             //Arrange
             const body = {
-                "username": "Test",
-                "password": "testing"
+                "name": "John",
+                "username": "test",
+                "password": "testing",
+                "surname": "Doe",
+                "email": "j@doe.co"
             }
             jest.spyOn(db, "query").mockResolvedValueOnce({ rows: [{login_id: 1}]})
-            jest.spyOn(db, "query").mockResolvedValueOnce({ rows: [{username: body.username, login_id: 1}]})
+            jest.spyOn(db, "query").mockResolvedValueOnce({ rows: [{...body, login_id: 1}]})
 
             //Act
             const response = await User.create(body)
@@ -24,8 +27,9 @@ describe('User Model', () => {
             expect(response).toHaveProperty('login_id')
             expect(response.username).toBe(body.username)
             expect(response.login_id).toBe(1)
-            expect(db.query).toHaveBeenCalledWith("INSERT INTO login_info (username, password) VALUES ($1, $2) RETURNING login_id;", [body.username, body.password]);
-            expect(db.query).toHaveBeenCalledWith("SELECT login_id, username FROM login_info WHERE login_id = $1", [1]);
+            expect(db.query).toHaveBeenCalledWith("INSERT INTO login_info (name, surname, username, password, email) VALUES ($1, $2, $3, $4, $5) RETURNING login_id;", 
+                [body.name, body.surname, body.username, body.password, body.email]);
+            expect(db.query).toHaveBeenCalledWith("SELECT login_id, username, name, surname, email FROM login_info WHERE login_id = $1", [1]);
         });
         it("throws error if password or username missing", async () => {
             //Arrange
@@ -58,7 +62,7 @@ describe('User Model', () => {
             expect(response).toHaveProperty('login_id')
             expect(response.username).toBe(body.username)
             expect(response.login_id).toBe(body.login_id)
-            expect(db.query).toHaveBeenCalledWith("SELECT login_id, username FROM login_info WHERE login_id = $1", [body.login_id]);
+            expect(db.query).toHaveBeenCalledWith("SELECT login_id, username, name, surname, email FROM login_info WHERE login_id = $1", [body.login_id]);
         });
         it("throws error if return from db is empty", async () => {
             //Arrange
