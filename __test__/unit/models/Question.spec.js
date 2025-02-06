@@ -77,7 +77,7 @@ describe("Question model", () => {
 
       expect(result).toBeInstanceOf(Question);
       expect(result.question_id).toBe(mockQuestion.question_id);
-      expect(db.query).toBeCalledWith("SELECT question, option_a, option_b, option_c, option_d FROM questions WHERE question_id = $1",
+      expect(db.query).toBeCalledWith("SELECT question, option_a, option_b, option_c, option_d, clue FROM questions WHERE question_id = $1",
         [mockQuestion.question_id]
       );
     });
@@ -88,7 +88,7 @@ describe("Question model", () => {
       jest.spyOn(db, "query").mockResolvedValueOnce({ rows: [] });
 
       await expect(Question.getById(mockId)).rejects.toThrow("Question not found");
-      expect(db.query).toBeCalledWith("SELECT question, option_a, option_b, option_c, option_d FROM questions WHERE question_id = $1",
+      expect(db.query).toBeCalledWith("SELECT question, option_a, option_b, option_c, option_d, clue FROM questions WHERE question_id = $1",
         [mockId]
       );
     });
