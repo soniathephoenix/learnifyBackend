@@ -7,7 +7,8 @@
     "dev": "nodemon index.js",
     "start": "node index.js",
     "setup-db": "node ./database/setup.js",
-    "coverage": "jest --coverage --testPathPattern=/unit/"
+    "coverage": "jest --coverage --testPathPattern=/unit/",
+    "integrationTests": "jest --testPathPattern=/integration/ --watchAll --detectOpenHandles --runInBand --verbose"
   },
   "author": "",
   "license": "ISC",

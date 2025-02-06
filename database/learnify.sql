@@ -58,10 +58,9 @@ VALUES
     (1, 1, 'Which one of the following is a process of erosion in coastal areas?', '../images/clue2', 'Hydraulic power', 'Longshore drift ', 'Rock fall', 'Slumping ', 'Hydraulic power'),
     (1, 2, 'Which word describes the process of erosion when stones collide with each other as they move downstream?', '../images/clue3', 'Abrasion', 'Attrition', 'Hydraulic action', 'Solution', 'Attrition'),
     (1, 3, 'Which statement describes the characteristics of temperate deciduous forests?', '../images/clue4', 'The vegetation is short because the growing season only lasts two months.', 'The trees drop their dead leaves because of lower temperatures in winter.', 'The vegetation is sparse because rainfall is low.', 'The vegetation is evergreen because the climate is hot all year round', 'The trees drop their dead leaves because of lower temperatures in winter.'),
-    (1, 4, 'Which measure of development combines income, life expectancy and education levels?', '../images/clue5', 'Gross National Income (GNI) per head', 'Human Development Index (HDI)', 'Infant mortality rate (IMR)', 'People per doctor', 'Human Development Index (HDI)'),
-    (1, 5, 'Which city is known as the City of Lions but has no native lions?', NULL, 'Hanoi', 'Bangkok', 'Kuala Lumpur', 'Singapore', 'Singapore');
+    (1, 4, 'Which measure of development combines income, life expectancy and education levels?', '../images/clue5', 'Gross National Income (GNI) per head', 'Human Development Index (HDI)', 'Infant mortality rate (IMR)', 'People per doctor', 'Human Development Index (HDI)');
 
-
+--(1, 5, 'Which city is known as the City of Lions but has no native lions?', NULL, 'Hanoi', 'Bangkok', 'Kuala Lumpur', 'Singapore', 'Singapore')
 
 -- Create function and trigger to auto-fill the points_info table 
 CREATE OR REPLACE FUNCTION auto_insert() 
