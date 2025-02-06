@@ -6,8 +6,8 @@ TRUNCATE login_info RESTART IDENTITY CASCADE;
 INSERT INTO login_info (name, surname, username, email, password)
 VALUES  
     ('test1', 'surname', 'username1', 'email1', '$2b$10$WoP3NXT3j2iSJfCB3iSWguqddO3FUffoilTDYrZhnclYEDeBVqoKG'),
-    ('test2', 'surname', 'username2', 'email2', '$2b$10$WoP3NXT3j2iSJfCB3iSWguqddO3FUffoilTDYrZhnclYEDeBVqoKG'),
-    ('test3', 'surname', 'username3', 'email3', '$2b$10$WoP3NXT3j2iSJfCB3iSWguqddO3FUffoilTDYrZhnclYEDeBVqoKG');
+    ('test2', 'surname', 'username2', 'email2', '$2b$10$WoP3NXT3j2iSJfCB3iSWguqddO3FUffoilTDYrZhnclYEDeBVqoKG');
+                                                --This is password hash for password of 'testing'
 
 INSERT INTO questions (level, points_required, question, clue, option_a, option_b, option_c, option_d, correct_answer)
 VALUES

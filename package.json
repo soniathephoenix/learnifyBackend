@@ -7,7 +7,7 @@
     "dev": "nodemon index.js",
     "start": "node index.js",
     "setup-db": "node ./database/setup.js",
-    "coverage": "jest --coverage --testPathPattern=/unit/",
+    "coverage": "jest --coverage",
     "integrationTests": "jest --testPathPattern=/integration/ --watchAll --detectOpenHandles --runInBand --verbose"
   },
   "author": "",
@@ -26,5 +26,15 @@
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.13.1"
-  }
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+        "/node_modules/",
+        "./__tests__/integration/config.js",
+        "./database/connect.js"
+      ],
+      "testPathIgnorePatterns": [
+      "./__tests__/integration/config.js"
+    ]
+    }
 }
