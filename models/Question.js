@@ -12,6 +12,7 @@ class Question {
     this.option_c = option_c;
     this.option_d = option_d;
     this.correct_answer = correct_answer;
+    this.clue = clue;
   }
 
 
@@ -26,7 +27,7 @@ class Question {
     return response.rows.map(g => new Question(g));
   }
   static async getById(question_id) {
-    const result = await db.query("SELECT question, option_a, option_b, option_c, option_d FROM questions WHERE question_id = $1",[question_id]
+    const result = await db.query("SELECT question, option_a, option_b, option_c, option_d, clue FROM questions WHERE question_id = $1",[question_id]
     );
 
     if (result.rows.length !== 1) throw new Error("Question not found");
