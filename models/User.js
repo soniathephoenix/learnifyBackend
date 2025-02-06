@@ -60,16 +60,12 @@ class User {
 
     async getCurrentQ() {
         try{
-            let pointsResponse = await db.query(`
-                SELECT points
-                FROM points_info
-                WHERE user_id = $1;
-            `, [this.login_id])
+            let pointsResponse = await db.query(`SELECT points FROM points_info WHERE user_id = $1;`, [this.login_id])
             const points = pointsResponse.rows[0].points
             let questionsResponse =  await Question.getByPoints(points)
             return questionsResponse
         } catch(err){
-            return await Question.getByPoints(0)
+            throw new Error("No question question found") //G change 
         }
    }
 }
