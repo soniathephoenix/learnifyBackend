@@ -1,4 +1,5 @@
 const User = require('../../../models/User')
+const Question = require('../../../models/Question')
 const db = require('../../../database/connect')
 
 describe('User Model', () => {
