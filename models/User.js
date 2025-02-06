@@ -20,24 +20,16 @@ class User {
         return new User(response.rows[0]);
     }
 
-
-
     static async incrementPoints(userId) {
-        const pointsQuery = 'SELECT points FROM points_info WHERE user_id = $1';
-        const pointsResult = await db.query(pointsQuery, [userId]);
-
-        if (pointsResult.rowCount === 0) {
+        const updateQuery = 'UPDATE points_info SET points = points + 1 WHERE user_id = $1 RETURNING *';
+        const updateResult = await db.query(updateQuery, [userId]);
+    
+        if (updateResult.rowCount === 0) {
             throw new Error('User not found in points_info');
         }
-
-        const currentPoints = pointsResult.rows[0].points;
-        const updateQuery = 'UPDATE points_info SET points = $1 + 1 WHERE user_id = $2 RETURNING *';
-        const updateResult = await db.query(updateQuery, [currentPoints, userId]);
-
-        const updatedUser = updateResult.rows[0];
-        return updatedUser;
+    
+        return updateResult.rows[0];
     }
-
 
 
     static async getOneByUsername(username) {
@@ -58,16 +50,37 @@ class User {
         return newUser;
     }
 
-    async getCurrentQ() {
-        try{
-            let pointsResponse = await db.query(`SELECT points FROM points_info WHERE user_id = $1;`, [this.login_id])
-            const points = pointsResponse.rows[0].points
-            let questionsResponse =  await Question.getByPoints(points)
-            return questionsResponse
-        } catch(err){
-            throw new Error("No question question found") //G change 
+    static async resetPoints(userId) {
+        const updateQuery = 'UPDATE points_info SET points = 0 WHERE user_id = $1 RETURNING *';
+        const result = await db.query(updateQuery, [userId]);
+    
+        if (result.rowCount === 0) {
+            throw new Error('User not found or points not reset');
         }
-   }
+    
+        console.log(`Points reset for user ${userId}`);
+        return result.rows[0];
+    }
+
+    async getCurrentQ() {
+        try {
+            let pointsResponse = await db.query("SELECT points FROM points_info WHERE user_id = $1;", [this.login_id]);
+            if (pointsResponse.rows.length === 0) throw new Error("User points not found");
+    
+            const points = pointsResponse.rows[0].points;
+            let questionsResponse = await Question.getByPoints(points);
+    
+            if (!questionsResponse) {
+                console.log("No more questions available. User has completed all questions.");
+                return null;  
+            }
+    
+            return questionsResponse;
+        } catch (err) {
+            console.log("Error fetching questions:", err);
+            return null;
+        }
+    }
 }
 
 module.exports = User;
