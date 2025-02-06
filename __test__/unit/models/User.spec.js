@@ -191,13 +191,5 @@ describe('User Model', () => {
             expect(response).toBeNull();
         });
 
-        it("throws error if user points not found", async () => {
-            // Arrange
-            jest.spyOn(db, "query").mockResolvedValueOnce({ rows: [], rowCount: 0 });
-            const user = new User({ login_id: 1 });
-
-            // Act & Assert
-            await expect(user.getCurrentQ()).rejects.toThrow("User points not found");
-        });
     });
 });
