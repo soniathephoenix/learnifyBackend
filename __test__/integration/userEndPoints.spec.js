@@ -29,4 +29,14 @@ describe('User API Endpoints', () => {
       expect(response.body.description).toBe('A puzzle for GCSE geography students')
     })
   });
+  describe('POST /users/login', () => {
+    it('responds to POST /user/login with a token', async () => {
+      const userDetails = {username: "username1", password: "testing"}
+      const response = await request(api).post('/users/login').send(userDetails)
+  
+      expect(response.statusCode).toBe(200)
+      expect(response.body.success).toBe(true)
+      expect(response.body).toHaveProperty('token')
+    })
+  });
 })
